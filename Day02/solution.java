@@ -19,7 +19,7 @@ public class solution {
         reverseArray(arr.subList(size-k,size));
         return arr;
 
-        // Direct collections
+        // Direct collection
 //        Collections.reverse(arr);
 //        Collections.reverse(arr.subList(0,size-k));
 //        Collections.reverse(arr.subList(size-k, size));
