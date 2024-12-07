@@ -14,7 +14,6 @@ public class  solution {
     public static int firstUniqChar(String s){
         Map<Character, Integer> hashMap = new LinkedHashMap<>();
         for(int i=0; i<s.length(); i++) {
-            hashMap.put(s.charAt(i), hashMap.getOrDefault())
             hashMap.computeIfPresent(s.charAt(i), (key, value) -> value+1);
             hashMap.computeIfAbsent(s.charAt(i), value->0);
         }
