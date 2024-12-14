@@ -9,15 +9,11 @@ public class  solution {
     }
 
     public static void insertionSort(int n , int[] arr) {
-        if(n>1) {
-            for(int i=1; i<n; i++) {
-                int element = arr[i];
-                int j=i;
-                while(j>0 && arr[j-1]>element) {
-                    arr[j]=arr[j-1];
-                    arr[j-1]=element;
-                    j--;
-                }
+        for(int i=0; i<=n-1; i++) {
+            int j=i;
+            while(j>0 && arr[j-1]>arr[j]) {
+                swap(j,j-1,arr);
+                j--;
             }
         }
     }
