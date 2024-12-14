@@ -1,24 +1,24 @@
-package Problem24;
+package Problem25;
 
 public class  solution {
     public static void main(String[] args) {
         // consider 0 as +ve.
         int[] arr = {6,5,4,3,2,1};
-        selectionSort(arr.length, arr);
+        insertionSort(arr.length, arr);
         for (int i=0; i<arr.length; i++) System.out.print(arr[i]+" ");
     }
 
-    public static void selectionSort(int n , int[] arr) {
-        for(int i=0; i<n-1; i++) {
-            int smallest = arr[i];
-            int indexSmallest = i;
-            for(int j=i; j<n;j++) {
-                if(arr[j]<smallest) {
-                    smallest = arr[j];
-                    indexSmallest = j;
+    public static void insertionSort(int n , int[] arr) {
+        if(n>1) {
+            for(int i=1; i<n; i++) {
+                int element = arr[i];
+                int j=i;
+                while(j>0 && arr[j-1]>element) {
+                    arr[j]=arr[j-1];
+                    arr[j-1]=element;
+                    j--;
                 }
             }
-            swap(i,indexSmallest,arr);
         }
     }
 
