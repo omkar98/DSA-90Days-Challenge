@@ -1,6 +1,4 @@
-package Day03;
-
-import java.util.Collections;
+package Problem03;
 
 public class solution {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package Day09;
+package Problem09;
 
 import java.math.BigInteger;
 

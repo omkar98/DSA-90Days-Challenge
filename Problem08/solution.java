@@ -1,6 +1,4 @@
-package Day08;
-
-import java.util.Stack;
+package Problem08;
 
 public class solution {
     public static void main(String[] args) {

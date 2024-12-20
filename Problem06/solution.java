@@ -1,9 +1,4 @@
-package Day06;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+package Problem06;
 
 public class solution {
     public static void main(String[] args) {
