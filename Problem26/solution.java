@@ -2,7 +2,8 @@ package Problem26;
 
 public class  solution {
     public static void main(String[] args) {
-        int[] arr = {1, 2, 7, -4, 3, 2, -10, 9, 1};
+//        int[] arr = {1, 2, 7, -4, 3, 2, -10, 9, 1};
+        int[] arr = {-1,-2,-3}; // corner case. May not work if all the elements are -ve. Revisit the problem and fix it.
         System.out.println(maxSubarraySum(arr, arr.length));
     }
 

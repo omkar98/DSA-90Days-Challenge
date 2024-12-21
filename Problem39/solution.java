@@ -1,6 +1,7 @@
 package Problem39;
 
 public class  solution {
+    // circular array kadane
     public static void main(String[] args) {
 //        ArrayList<Integer> arr = new ArrayList<>(Arrays.asList(10,5,5,6,2));
 //        int[] arr = {3,1,-2,9};
