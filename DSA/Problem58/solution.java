@@ -58,6 +58,7 @@ public class  solution {
             if(ptr2!=null) ptr1 = ptr1.next;
         }
         return ptr1;
+
     }
 }
 
