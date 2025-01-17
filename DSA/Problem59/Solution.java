@@ -2,23 +2,19 @@ package DSA.Problem59;
 
 public class Solution {
     public static void main(String[] args) {
-        LinkedListNode headA = new LinkedListNode(9);
-        headA.next = new LinkedListNode(9);
-        headA.next.next = new LinkedListNode(9);
-        headA.next.next.next = new LinkedListNode(9);
+        Node head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
+        head.next.next.next = new Node(4);
+        head.next.next.next.next = new Node(5);
 
-        LinkedListNode headB = new LinkedListNode(9);
-        headB.next = new LinkedListNode(9);
-//        headB.next.next = new LinkedListNode(6);
-
-        // Print the linked lists to verify
-//        printLinkedList(headA);
-//        printLinkedList(headB);
-        printLinkedList(addTwoNumbers(headA, headB));
+        // Print the linked list to verify
+        printLinkedList(head);
+        printLinkedList(insertionSortLL(head));
     }
 
-    public static void printLinkedList(LinkedListNode head) {
-        LinkedListNode current = head;
+    public static void printLinkedList(Node head) {
+        Node current = head;
         while (current != null) {
             System.out.print(current.data + " ");
             current = current.next;
@@ -26,48 +22,28 @@ public class Solution {
         System.out.println();
     }
 
-    static LinkedListNode addTwoNumbers(LinkedListNode head1, LinkedListNode head2) {
-        LinkedListNode finalResultHead = new LinkedListNode(0);
-        LinkedListNode temp1 = head1;
-        LinkedListNode temp2 = head2;
-        LinkedListNode finalTemp = finalResultHead;
-        int carry = 0;
-        while(temp1!=null && temp2!=null) {
-            int data = temp1.data + temp2.data + carry;
-            int value = data%10;
-            finalTemp.next = new LinkedListNode(value);
-            carry = data/10;
-            finalTemp = finalTemp.next;
-            temp1 = temp1.next;
-            temp2 = temp2.next;
-        }
-        while(temp1!=null) {
-            int data = temp1.data+carry;
-            int value = data%10;
-            finalTemp.next = new LinkedListNode(value);
-            carry = data/10;
-            finalTemp = finalTemp.next;
-            temp1 = temp1.next;
-        }
-        while(temp2!=null) {
-            int data = temp2.data+carry;
-            int value = data%10;
-            finalTemp.next = new LinkedListNode(value);
-            carry = data/10;
-            finalTemp = finalTemp.next;
-            temp2 = temp2.next;
-        }
+    public static Node insertionSortLL(Node head) {
+        Node finalHead = new Node(0);
+        finalHead.next = head;
 
-        if(carry>0) {
-            finalTemp.next = new LinkedListNode(carry);
+        Node temp = head.next;
+        while(temp!=null) {
+            Node i = finalHead;
+            Node iPrev = finalHead;
+            while(i.data<temp.data) {
+                iPrev = i;
+                i=i.next;
+            }
+            iPrev.next = temp;
+            Node tempNext = temp.next;
+            temp.next = i;
+
+            while(i.next!=temp) {
+                i=i.next;
+            }
+            i.next=tempNext;
+            temp = tempNext;
         }
-
-
-        return finalResultHead.next;
+        return finalHead.next;
     }
 }
-
-
-
-
-
