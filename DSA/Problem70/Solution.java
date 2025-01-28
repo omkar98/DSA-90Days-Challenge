@@ -28,46 +28,47 @@ class MinStack {
         this.stack = new Stack<Integer>();
     }
 
-    // Function to add another element equal to num at the top of stack.
+    // Function to add another element equal to num at the top of this.stack.
     void push(int num) {
-        if(stack.isEmpty()) {
+        if(this.stack.isEmpty()) {
             this.min = num;
-            stack.push(num);
+            this.stack.push(num);
         }
         else {
             if(num < getMin()) {
-                stack.push(2*num - getMin());
+                this.stack.push(2*num - getMin());
                 this.min = num;
             } else {
-                stack.push(num);
+                this.stack.push(num);
             }
         }
     }
 
-    // Function to remove the top element of the stack.
+    // Function to remove the top element of the this.stack.
     int pop() {
-        if(stack.isEmpty()) return -1;
-        if(stack.peek()>=getMin()) {
-            return stack.pop();
+        if(this.stack.isEmpty()) return -1;
+        if(this.stack.peek()>=getMin()) {
+            return this.stack.pop();
         } else {
             int topElement = top();
-            this.min = 2*getMin() - stack.pop();
+            this.min = 2*getMin() - this.stack.pop();
             return topElement;
         }
     }
 
-    // Function to return the top element of stack if it is present. Otherwise
+    // Function to return the top element of this.stack if it is present. Otherwise
     // return -1.
     int top() {
-        if(stack.peek()>getMin()) return stack.peek();
+        if(this.stack.isEmpty()) return -1;
+        if(this.stack.peek()>getMin()) return this.stack.peek();
         else {
-            return !stack.isEmpty() ? getMin() : -1;
+            return getMin();
         }
     }
 
-    // Function to return minimum element of stack if it is present. Otherwise
+    // Function to return minimum element of this.stack if it is present. Otherwise
     // return -1.
     int getMin() {
-        return !stack.isEmpty() ? this.min : -1;
+        return !this.stack.isEmpty() ? this.min : -1;
     }
 }
