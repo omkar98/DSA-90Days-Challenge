@@ -1,0 +1,1 @@
+Followed industry standards of naming the variables and declaring them final and then using them.
