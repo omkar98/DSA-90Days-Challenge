@@ -1,9 +1,6 @@
 package DSA.Problem75BinaryTreesSimple;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 class Node<T> {
     public T data;
@@ -28,10 +25,15 @@ public class Solution {
          root.right.left = new Node<>(6);
          root.right.right = new Node<>(7);
 
-         preOrder(root); System.out.println();
-         inOrder(root); System.out.println();
-         postOrder(root);System.out.println();
-         System.out.println(levelOrder(root));
+         System.out.print("PreOrder: Recursive: ");preOrder(root);
+         System.out.print("\nPreOrder: Iterative: ");preOrderIterative(root);
+         System.out.print("\nInOrder: Recursive: ");inOrder(root);
+         System.out.print("\nInOrder: Iterative: ");inOrderIterative(root);
+         System.out.print("\nPostOrder: Recursive: ");postOrder(root);
+         System.out.print("\nPostOrder: Iterative: ");postOrderIterative(root);
+         System.out.print("\nLevelOrder: Recursive: ");System.out.println(levelOrder(root));
+
+
     }
     /* Tree Traversals -->
     1. DFS(DepthFirstSearch) -> 3 types:
@@ -41,12 +43,24 @@ public class Solution {
     2. BFS (BreadthFirstSearch) [easier] [Also called Level Order Traversal]
     */
 
-    // DFS Type-1
+    // DFS Type-1 (recursion)
     public static void preOrder(Node<Integer> root) {
         if(root == null) return;
         System.out.print(root.data + " ");
         preOrder(root.left);
         preOrder(root.right);
+    }
+    // DFS Type-1 (iterative single stack)
+    public static void preOrderIterative(Node<Integer> root) {
+        if(root == null) return;
+        Stack<Node> stack = new Stack<>();
+        stack.add(root);
+        while(!stack.isEmpty()) {
+            Node currentElement = stack.pop();
+            System.out.print(currentElement.data + " ");
+            if(currentElement.right!=null) stack.add(currentElement.right);
+            if(currentElement.left!=null) stack.add(currentElement.left);
+        }
     }
 
     // DFS Type-2
@@ -56,6 +70,23 @@ public class Solution {
         System.out.print(root.data + " ");
         inOrder(root.right);
     }
+    // DFS Type-2 (Iterative single stack)
+    public static void inOrderIterative(Node<Integer> root) {
+        Stack<Node> stk = new Stack<>();
+        if(root==null) return;
+        stk.push(root);
+        Node currNode = root;
+        while(!stk.isEmpty()) {
+            if(currNode==null) {
+                currNode = stk.pop();
+                System.out.print(currNode.data + " ");
+                currNode = currNode.right;
+            } else {
+                currNode = currNode.left;
+            }
+            if(currNode!=null) stk.push(currNode);
+        }
+    }
 
     // DFS Type-3
     public static void postOrder(Node<Integer> root) {
@@ -63,6 +94,32 @@ public class Solution {
         postOrder(root.left);
         postOrder(root.right);
         System.out.print(root.data + " ");
+    }
+
+    // DFS Type-3 (Iterative)
+    // Best: https://www.youtube.com/watch?v=QhszUQhGGlA
+    public static void postOrderIterative(Node<Integer> root) {
+        Stack<Node> stack = new Stack<>();
+        Stack<Boolean> visit = new Stack<>();
+        if(root==null) return;
+        stack.push(root);
+        visit.push(false);
+        while(!stack.isEmpty()) {
+            Node curr = stack.pop();
+            Boolean visited = visit.pop();
+            if(visited) {
+                System.out.print(curr.data + " ");
+            } else {
+                if(curr!=null) {
+                    stack.push(curr);
+                    visit.push(true);
+                    stack.push(curr.right);
+                    visit.push(false);
+                    stack.push(curr.left);
+                    visit.push(false);
+                }
+            }
+        }
     }
 
     //BFS: Level-Order Traversal
