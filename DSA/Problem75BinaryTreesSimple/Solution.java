@@ -32,6 +32,7 @@ public class Solution {
          System.out.print("\nPostOrder: Recursive: ");postOrder(root);
          System.out.print("\nPostOrder: Iterative: ");postOrderIterative(root);
          System.out.print("\nLevelOrder: Recursive: ");System.out.println(levelOrder(root));
+         System.out.print("\nDepth of Tree ");System.out.println(findMaxDepth(root));
 
 
     }
@@ -138,5 +139,17 @@ public class Solution {
             if(currentNode.right!=null) queue.add(currentNode.right);
         }
         return finalList;
+    }
+
+    //Depth/Height: find the total "number of nodes" encountered while moving from the root node to the farthest leaf node, along the longest path of the binary tree.
+    // 2 ways:
+    //    1.  Level Order (O(n))
+    //    2.   Recursive Traversal (O(heightOfTree))
+    public static int findMaxDepth(Node<Integer> root)
+    {
+        if(root==null) return 0;
+        int leftDepth = findMaxDepth(root.left);
+        int rightDepth = findMaxDepth(root.right);
+        return 1+Math.max(leftDepth, rightDepth);
     }
 }
