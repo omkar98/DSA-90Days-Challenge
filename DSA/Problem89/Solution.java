@@ -1,46 +1,64 @@
 package DSA.Problem89;
 
-import java.util.List;
-import java.util.Stack;
 
+class BinaryTreeNode < Integer > {
+    int data;
+    BinaryTreeNode <Integer> left;
+    BinaryTreeNode <Integer> right;
 
-class BinaryTreeNode<T> {
-    T data;
-    BinaryTreeNode<T> left;
-    BinaryTreeNode<T> right;
-
-    public BinaryTreeNode(T data) {
+    public BinaryTreeNode(int data) {
         this.data = data;
     }
 }
 
 public class Solution {
-
     public static void main(String[] args) {
-        BinaryTreeNode<Integer> node1 = new BinaryTreeNode<>(1);
-        node1.left = new BinaryTreeNode<>(2);
-        node1.right = new BinaryTreeNode<>(2);
+        BinaryTreeNode root = new BinaryTreeNode(2);
+        root.left = new BinaryTreeNode(35);
+        root.right = new BinaryTreeNode(10);
 
-        node1.left.left = new BinaryTreeNode<>(3);
-        node1.left.right = new BinaryTreeNode<>(4);
+        root.left.left = new BinaryTreeNode(2);
+        root.left.right = new BinaryTreeNode(3);
 
-        node1.right.left = new BinaryTreeNode<>(4);
-        node1.right.right = new BinaryTreeNode<>(4);
+        root.right.left = new BinaryTreeNode(5);
+        root.right.right = new BinaryTreeNode(2);
 
-        System.out.print(isSymmetric(node1));
+        changeTree(root);
+
     }
 
-    public static boolean isSymmetric(BinaryTreeNode<Integer> root) {
-        boolean result = (root!=null) ? areNodesEqual(root.left, root.right) : true;
-        return result;
+    public static void changeTree(BinaryTreeNode <Integer> root) {
+        childrenSumProperty(root);
     }
 
-    public static boolean areNodesEqual(BinaryTreeNode<Integer> left, BinaryTreeNode<Integer> right) {
-        if((left!=null && right==null) || (right!=null && left==null)) return false;
-        if(left!=null && right!=null && !left.data.equals(right.data)) return false;
-        if(left==null && right==null) return true;
-        boolean result = areNodesEqual(left.left, right.right);
-        if(result) result = areNodesEqual(left.right, right.left);
-        return result;
+    public static void childrenSumProperty(BinaryTreeNode<Integer> root) {
+        if(root==null) return;
+        Integer max = findMax(root);
+        makeAllNodesMax(root, max);
+        childrenSumProperty(root.right);
+        childrenSumProperty(root.left);
+        updateRootNode(root);
     }
+
+    public static Integer findMax(BinaryTreeNode<Integer> root) {
+        Integer max = root.data;
+        if(root.left!=null) max = Math.max(max,root.left.data);
+        if(root.right!=null) max = Math.max(max,root.right.data);
+        return max;
+    }
+
+    public static void makeAllNodesMax(BinaryTreeNode<Integer> root, Integer max) {
+        root.data = max;
+        if(root.left!=null) root.left.data = max;
+        if(root.right!=null) root.right.data = max;
+    }
+
+    public static void updateRootNode(BinaryTreeNode<Integer> root) {
+        int value = 0;
+        if(root.left!=null) value += root.left.data;
+        if(root.right!=null) value += root.right.data;
+        root.data = Math.max(root.data, value);
+    }
+
+
 }
