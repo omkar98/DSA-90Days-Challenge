@@ -1,6 +1,10 @@
 package DSA.Problem92;
 
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 class BinaryTreeNode<T> {
     T data;
     BinaryTreeNode<T> left;
@@ -11,33 +15,58 @@ class BinaryTreeNode<T> {
     }
 }
 
+class ParentBinaryTreeNode<T> {
+    T data;
+    ParentBinaryTreeNode<T> left;
+    ParentBinaryTreeNode<T> right;
+    ParentBinaryTreeNode<T> parent;
+
+    public ParentBinaryTreeNode(T data) {
+        this.data = data;
+    }
+    public ParentBinaryTreeNode(T data, ParentBinaryTreeNode<T> left, ParentBinaryTreeNode<T> right, ParentBinaryTreeNode<T> parent) {
+        this.data = data;
+        this.left = left;
+        this.right = right;
+        this.parent = parent;
+    }
+}
+
 public class Solution {
 
     public static void main(String[] args) {
-        BinaryTreeNode<Integer> node1 = new BinaryTreeNode<>(1);
-        node1.left = new BinaryTreeNode<>(2);
-        node1.right = new BinaryTreeNode<>(2);
+        BinaryTreeNode<Integer> node1 = new BinaryTreeNode<>(3);
+        node1.left = new BinaryTreeNode<>(5);
+        node1.right = new BinaryTreeNode<>(1);
 
-        node1.left.left = new BinaryTreeNode<>(3);
-        node1.left.right = new BinaryTreeNode<>(4);
+        node1.left.left = new BinaryTreeNode<>(6);
+        node1.left.right = new BinaryTreeNode<>(2);
 
-        node1.right.left = new BinaryTreeNode<>(4);
-        node1.right.right = new BinaryTreeNode<>(4);
+        node1.right.left = new BinaryTreeNode<>(0);
+        node1.right.right = new BinaryTreeNode<>(8);
 
-        System.out.print(isSymmetric(node1));
+        node1.left.right.left = new BinaryTreeNode<>(7);
+        node1.left.right.right = new BinaryTreeNode<>(4);
+
+        System.out.print(printNodesAtDistanceK(node1,node1.left,2));
     }
 
-    public static boolean isSymmetric(BinaryTreeNode<Integer> root) {
-        boolean result = (root!=null) ? areNodesEqual(root.left, root.right) : true;
-        return result;
+    public static List<BinaryTreeNode<Integer>> printNodesAtDistanceK(BinaryTreeNode<Integer> root, BinaryTreeNode<Integer> target, int K) {
+        ParentBinaryTreeNode newRoot = recreateUsingParentNodes(root);
+        return null;
     }
 
-    public static boolean areNodesEqual(BinaryTreeNode<Integer> left, BinaryTreeNode<Integer> right) {
-        if((left!=null && right==null) || (right!=null && left==null)) return false;
-        if(left!=null && right!=null && !left.data.equals(right.data)) return false;
-        if(left==null && right==null) return true;
-        boolean result = areNodesEqual(left.left, right.right);
-        if(result) result = areNodesEqual(left.right, right.left);
-        return result;
+    public static ParentBinaryTreeNode recreateUsingParentNodes(BinaryTreeNode<Integer> root) {
+        return convert(root, null);
     }
+    public static ParentBinaryTreeNode convert(BinaryTreeNode<Integer> oldRoot, ParentBinaryTreeNode<Integer> parent) {
+        if(oldRoot == null) return null;
+        ParentBinaryTreeNode<Integer> newNode = new ParentBinaryTreeNode<>(oldRoot.data);
+        newNode.parent = parent;                         // set back‑pointer
+        newNode.left  = convert(oldRoot.left,  newNode); // recurse left
+        newNode.right = convert(oldRoot.right, newNode); // recurse right
+        return newNode;
+    }
+
+
 }
