@@ -1,20 +1,24 @@
 package DSA.Problem109;
 
+import java.util.Arrays;
+
 public class Solution
 {
     public static void main(String[] arr){
-        System.out.println(reverseString(""));
+        int[] arrInt = new int[]{1,2,3,2,1,4,4};
+        System.out.println(findUnique(arrInt));
     }
-    public static String reverseString(String str)
-    {
-        String[] strArray = str.split(" ");
-        StringBuilder strbuilder = new StringBuilder();
-        int strLength = strArray.length;
-        for(int i=0; i<strLength; i++) {
-            strbuilder.append(strArray[strLength-i-1]);
-            if(i<strLength-1)strbuilder.append(" ");
+    public static int findUnique(int[] arr){
+        if(arr.length==1) return arr[0] ;
+        if(arr.length%2==0) return -1 ;
+        Arrays.sort(arr);
+
+        for(int i=0; i<arr.length-1; i+=2){
+            if(arr[i]!=arr[i+1]) {
+                return arr[i];
+            }
         }
-        return strbuilder.toString();
+        return arr[arr.length-1];
     }
 
 }
