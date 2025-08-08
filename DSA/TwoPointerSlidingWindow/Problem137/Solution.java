@@ -17,13 +17,13 @@ public class Solution
             char c = str.charAt(right);
             int value = mpp.getOrDefault(c, 0);
             mpp.put(c,value+1);
-            while(mpp.size()>k){
+            if(mpp.size()>k){
                 char c1 = str.charAt(left);
                 mpp.computeIfPresent(c1, (key, val) -> val-1);
                 if(mpp.get(c1) == 0) mpp.remove(c1);
                 left++;
             }
-            maxLen = Math.max(maxLen, right-left+1);
+            if(mpp.size()<=k) maxLen = Math.max(maxLen, right-left+1);
             right++;
         }
         return maxLen;
