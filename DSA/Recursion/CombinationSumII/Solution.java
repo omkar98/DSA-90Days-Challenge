@@ -1,10 +1,5 @@
 package DSA.Recursion.CombinationSumII;
 
-/* 1. Reverse an Array
-   2. Check if a String in Palindrome
-   3. Fibonnaci (multiple recursion calls)
-* */
-
 
 import java.util.*;
 
@@ -15,7 +10,7 @@ public class Solution
             finalList.add(new ArrayList<>(ds));
             return;
         }
-        for(int i=0; i<n; i++){
+        for(int i=index; i<n; i++){
             if(i>index && Objects.equals(arr.get(i), arr.get(i - 1))) continue;
             if(arr.get(i)>target) break;
 
