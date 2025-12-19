@@ -1,13 +1,14 @@
 package StreamsAPI;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class StreamPractice {
     public static void main(String[] args) {
 //        level1Questions();
 //        level2Questions();
 //        level3Questions();
-        level4Questions();
+//        level4Questions();
         level5Questions();
         level6Questions();
         level7Questions();
@@ -41,6 +42,13 @@ public class StreamPractice {
                 new Student("David", 35, "Science", "London"),
                 new Student("Eve", 95, "Math", "Tokyo")
         );
+        Student.getUniqueCities(students);
+        Student.getStudentNames(students);
+        Student.studentsPassOrFail(students);
+        Student.countStudentsPassAndFail(students);
+        Student.topStudentScorerInEachSubject(students);
+        Student.topStudentNameScorerInEachSubject(students);
+        Student.allStudentNames(students);
     }
 
     
