@@ -31,4 +31,32 @@ public class TrapRainWater {
         System.out.println(totalSum);
         return totalSum;
     }
+
+    // I didn't get the intuition for the 2-ptr approach. I just follwed the steps, but no intuition. Needs practice.
+    public static int trapTwoPointerApproach(int[] height) {
+        int heightSize = height.length;
+        int leftPtr = 0;
+        int rightPtr = heightSize-1;
+        int leftMax = height[leftPtr];
+        int rightMax = height[rightPtr];
+        int trapTotal = 0;
+
+        while(leftPtr < rightPtr) {
+            if(leftMax < rightMax) {
+                // shift left forward
+                int trap =  Math.min(leftMax, rightMax)- height[leftPtr];
+                trapTotal += Math.max(trap, 0);
+                leftPtr+=1;
+                leftMax = Math.max(leftMax, height[leftPtr]);
+            } else {
+                // shift right backward
+                int trap =  Math.min(leftMax, rightMax)- height[rightPtr];
+                trapTotal += Math.max(trap, 0);
+                rightPtr-=1;
+                rightMax = Math.max(rightMax, height[rightPtr]);
+            }
+        }
+        System.out.println(trapTotal);
+        return trapTotal;
+    }
 }
