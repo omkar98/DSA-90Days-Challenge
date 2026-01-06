@@ -12,6 +12,6 @@ public class Solution {
 //        System.out.println(minStack.top());    // return 2
 //        System.out.println(minStack.getMin()); // return 1
 
-        evalReversePolishNotation.evalRPN(new String[]{"1","2","/","3","/","4","/"});
+        evalReversePolishNotation.evalRPN(new String[]{"1","2","+","3","*","4","-"});
     }
 }
