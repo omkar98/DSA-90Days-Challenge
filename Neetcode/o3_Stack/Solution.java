@@ -15,5 +15,6 @@ public class Solution {
         evalReversePolishNotation.evalRPN(new String[]{"1","2","+","3","*","4","-"});
         DailyTemperatures.dailyTemperatures(new int[]{73,74,75,71,69,72,76,73});
         System.out.println(CarFleet.carFleet(10, new int[]{6,8}, new int[]{3,2}));
+        HistogramLargestRectangle.largestRectangleArea(new int[]{2,1,5,6,2,3});
     }
 }
