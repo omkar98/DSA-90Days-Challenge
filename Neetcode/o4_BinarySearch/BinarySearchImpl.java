@@ -12,6 +12,23 @@ public class BinarySearchImpl {
         return index>=0 ? index : -1;
     }
 
+    public static int binarySearchImpl(int[] nums, int target) {
+        int size = nums.length;
+        int left = 0;
+        int right = size-1;
+        while(left<=right){
+            /* Super Important: https://youtu.be/s4DPM8ct1pI?si=jdVdkf5XxCU6SDl0&t=501
+            * For mid, adding (right+left) increases the value, esp. if they lie at the INT_MAX.
+            * Better option: subtraction and then adding the left: i.e left+(right-left), this way we are reducing the value.
+            * */
+            int mid = left+((right-left)/2);
+            if(nums[mid]==target) return mid;
+            else if(nums[mid]<target) left = mid+1;
+            else right = mid-1;
+        }
+        return -1;
+    }
+
     public static boolean searchMatrix(int[][] matrix, int target) {
         int matrixRows = matrix.length;
         int matrixColumns = matrix[0].length;
@@ -24,5 +41,22 @@ public class BinarySearchImpl {
         }
         List<Integer> actualRow = Arrays.stream(matrix[checkRow]).boxed().collect(Collectors.toList());
         return Collections.binarySearch(actualRow, target)>=0 ;
+    }
+
+    public static int findMin(int[] nums) {
+        int arrSize = nums.length;
+        int left = 0; int right = arrSize-1;
+        int mid = left+((right-left)/2);
+        int small = nums[0];
+        while(left<=right) {
+            mid = left+((right-left)/2);
+            small = Math.min(nums[left], Math.min(nums[mid],small));
+            if(nums[mid]>=nums[left]) {
+                left=mid+1;
+            } else {
+                right = mid-1;
+            }
+        }
+        return small;
     }
 }
