@@ -72,4 +72,35 @@ public class BinarySearchImpl {
         }
         return nums[left];*/
     }
+
+    public static int searchRotatedSortedArray(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] == target) return mid;
+
+            // Step 1: Check if the Left Side is sorted
+            if (nums[left] <= nums[mid]) {
+                // Step 2: Check if target is in this sorted left range
+                if (nums[left] <= target && target < nums[mid]) {
+                    right = mid - 1; // Target is here, discard right
+                } else {
+                    left = mid + 1;  // Target is not here, go right
+                }
+            }
+            // Step 3: Otherwise, the Right Side MUST be sorted
+            else {
+                // Step 4: Check if target is in this sorted right range
+                if (nums[mid] < target && target <= nums[right]) {
+                    left = mid + 1;  // Target is here, discard left
+                } else {
+                    right = mid - 1; // Target is not here, go left
+                }
+            }
+        }
+        return -1;
+    }
 }
